@@ -1,0 +1,86 @@
+html, body, #root, .App {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: row; 
+  height: 100%;
+  background-color: #eee;
+}
+.rightContent {
+  flex: 1; /* zajmuje resztę szerokości */
+  display: flex;
+  margin-left: 200px;
+  flex-direction: column;
+  height: 100%;
+}
+.content {
+  flex: 1;
+  background-color: #eee;
+  padding: 20px;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 0; /* usuwamy padding, aby tabela mogła wypełnić cały card */
+  display: flex;
+  flex-direction: column;
+  flex: 1;/* wysokość carda */
+  overflow: hidden; /* scroll pojawi się w tabeli */
+}
+/* TICKET LIST */
+
+
+.ticketList {
+  height: 75vh;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden; /* scroll będzie w wrapperze */
+}
+
+.tableWrapper {
+  flex: 1;           /* zajmuje całą wysokość ticketList */
+  overflow-y: auto;  /* scroll tylko dla danych */
+}
+
+.ticketList table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.ticketList th, .ticketList td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.ticketList th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  position: sticky;
+  top: 0;             /* nagłówek przyklejony */
+  z-index: 1;
+}
+
+.ticketList tr:hover {
+  background-color: #f1f7f9;
+}
+
+.selectedRow {
+  background-color: #e0f7fa !important;
+}

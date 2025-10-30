@@ -1,0 +1,117 @@
+/* Left side menu */
+.Slide-Left-Menu {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 200px; 
+  height: 100vh;
+  background-color: #fefefe;
+  position: fixed;
+}
+
+.Slide-Left-Menu a {
+  background-color: #fefefe;
+  color: black;
+  display: block;
+  padding: 12px;
+  margin:0 5px 0 5px;
+  text-decoration: none;
+  border-bottom: 1px solid #e7e7e7;
+}
+.Slide-Left-Menu h1{
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+.Slide-Left-Menu a:hover {
+  background-color: #ececec;
+}
+
+.arrow {
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
+
+/* Top Bar Menu */
+
+.Top-Bar {
+  height: 60px; /* wysokość paska */
+  margin: 5px 15px 5px 15px;
+  border-radius: 5px;
+  background-color: #fefefe;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.Path {
+  flex: 0 0 80%;           /* nie rośnie, nie kurczy się, 80% szerokości */
+}
+.Account {
+  flex: 1;                 /* wypełnia pozostałą przestrzeń */
+  text-align: right;       /* przesunięcie zawartości w prawo */
+}
+
+/* SUB MENU */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* link główny */
+.dropdown > a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  display: inline-block;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+.dropdown > a:hover {
+  background-color: #f0f0f0;
+}
+
+/* submenu */
+.submenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%; /* poniżej linka */
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 5px 0;
+  min-width: 160px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* pokaz submenu */
+.dropdown .submenu a {
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown .submenu a:hover {
+  background-color: #f2f2f2;
+  border-left: 3px solid #007bff; /* opcjonalny efekt */
+}
+
+/* animacja przy pokazaniu */
+.dropdown .submenu.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdown .submenu.hidden {
+  opacity: 0;
+  transform: translateY(0);
+}

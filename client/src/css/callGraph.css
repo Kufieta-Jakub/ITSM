@@ -1,0 +1,9 @@
+.callGraph {
+  background-color: white;
+  height: 100%; 
+  width: 100%;          /* wypełnia kafelek rodzica */
+  display: flex;
+  flex-direction: column; /* nagłówek + wykres w kolumnie */
+  padding: 10px;
+  text-align: center;
+}
