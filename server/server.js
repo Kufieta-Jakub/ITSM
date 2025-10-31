@@ -14,7 +14,18 @@ const db = mysql.createConnection({
 
 // endpoint do pobrania ticketów
 app.get("/api/tickets", (req, res) => {
-  db.query("SELECT * FROM tickets", (err, results) => {
+  db.query(`
+    SELECT 
+      t.ID,
+      t.Title,
+      c.Name,
+      c.Surname,
+      t.Status,
+      t.employeeID,
+      t.CreateDate
+      FROM tickets t
+      JOIN clients c ON t.ClientID = c.ID
+  `, (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Błąd bazy danych" });
     }

@@ -18,6 +18,7 @@ html, body, #root, .App {
 .content {
   flex: 1;
   background-color: #eee;
+  margin-left: 200px;
   padding: 20px;
   box-sizing: border-box;
   display: grid;
