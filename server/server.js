@@ -16,15 +16,15 @@ const db = mysql.createConnection({
 app.get("/api/tickets", (req, res) => {
   db.query(`
     SELECT 
-      t.ID,
+      t.Id,
       t.Title,
       c.Name,
       c.Surname,
       t.Status,
-      t.employeeID,
+      t.IdAssigne,
       t.CreateDate
       FROM tickets t
-      JOIN clients c ON t.ClientID = c.ID
+      JOIN clients c ON t.IdClient = c.Id
   `, (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Błąd bazy danych" });

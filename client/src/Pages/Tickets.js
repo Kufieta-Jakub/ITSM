@@ -52,7 +52,7 @@ function CreateTicketList() {
                 className={selectedRow === ticket.ID ? styles.selectedRow : ''}
                 style={{ cursor: 'pointer' }}
               >
-                <td>{ticket.ID}</td>
+                <td>{ticket.Id}</td>
                 <td>{ticket.Title}</td>
                 <td>{ticket.Name}</td>
                 <td>{ticket.Surname}</td>
@@ -80,6 +80,7 @@ function Tickets() {
               <div style={{ textAlign: "right" }}> 
                 <MyButton
                 text="Add ticket"
+                onClick={() => window.location.href = '/ServiceDesk/tickets/addTicket'}
                 width={"100px"}
                 margin={20}
                 />

@@ -31,6 +31,13 @@ function Menu({ label, items, activeMenu, setActiveMenu }) {
     </div>
   );
 }
+
+function showExactPath()
+{
+  const path = window.location.pathname;
+  const result = path.slice(1).replaceAll('/', ' > ');
+  return result;
+}
 function CreateMenu()
 {
     const [activeMenu, setActiveMenu] = useState(null);
@@ -47,7 +54,7 @@ function CreateMenu()
             <div className={styles.rightContent}>
                 <div className="Top-Bar">
                 <div className='Path'>
-                    Service Desk {'>'} Dashboard
+                    {showExactPath()}
                 </div>
                 <div className='Account'>
                     <a>Jakub Kufieta <span className="arrow">▼</span></a>
