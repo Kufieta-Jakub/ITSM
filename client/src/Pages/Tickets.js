@@ -58,7 +58,7 @@ function CreateTicketList() {
                 <td>{ticket.Surname}</td>
                 <td>{ticket.Status}</td>
                 <td>{ticket.Assigne}</td>
-                <td>{ticket.CreateDate}</td>
+                <td>{ticket.Creation_Date}</td>
               </tr>
             ))}
           </tbody>

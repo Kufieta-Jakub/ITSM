@@ -21,10 +21,9 @@ app.get("/api/tickets", (req, res) => {
       c.Name,
       c.Surname,
       t.Status,
-      t.IdAssigne,
-      t.CreateDate
+      t.Creation_Date
       FROM tickets t
-      JOIN clients c ON t.IdClient = c.Id
+      JOIN clients c ON t.Client_Id = c.Id
   `, (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Błąd bazy danych" });
