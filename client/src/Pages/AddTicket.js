@@ -13,38 +13,43 @@ function AddTicket() {
                 <div className={`${styles.card} ${styles.tickets}`}>
                     <div className={`${styles.inputs}`}>
                       Ticket id:<br/>
-                      <input type='text'></input><br/>
+                      {/*do value dopisuje sie to co sie wyswietla tip na przyszłosc*/}
+                      <input type='text' className={styles.form_input} readOnly></input><br/>
                       <br/>
                       <b>Client information:</b><br/>
                       Client:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Company:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       <br/>
 
                       <b>Ticket information:</b><br/>
                       Description:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Template:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Title:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       <br/>
 
                       <b>Advanced information:</b><br/>
                       Service:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Urgentity:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Assigne:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Status:<br/>
-                      <input type='text'></input><br/>
+                      <input type='text' className={styles.form_input}></input><br/>
                       Resolution:<br/>
-                      <input type='text'></input><br/>
-
-                      <button>Add Ticket</button>
-                      <button>Clear Ticket</button>
+                      <input type='text' className={styles.form_input}></input><br/>
+                      <div className={styles.form_buttons}>
+                        <MyButton
+                            text="Save ticket"
+                            width={"170px"}
+                            margin={5}
+                            />
+                      </div>
                     </div>
                     <div className={styles.rightTicket}>
                     Notes:

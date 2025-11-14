@@ -47,6 +47,7 @@ html, body, .App {
 
 .inputs {
   padding: 20px;
+  font-family: Arial, sans-serif;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border: 1px solid #eee;
@@ -63,7 +64,20 @@ html, body, .App {
   height: 100%;
 }
 
+/*formularz*/
 
+.form_input{
+  border-radius: 5px;
+  padding: px;
+  width: 100%;
+}
+.form_buttons{
+  margin-top: 30%;
+  text-align: center;
+}
+
+
+/*tabelka*/
 .tableWrapper {
   flex: 1;           /* zajmuje całą wysokość ticketList */
   overflow-y: auto;  /* scroll tylko dla danych */
