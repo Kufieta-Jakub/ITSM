@@ -39,6 +39,12 @@ html, body, .App {
   align-items: flex-start;      /* wyrównanie góry */
 }
 
+.rightContent,
+.content,
+.card {
+  min-height: 0;
+}
+
 .inputs {
   padding: 20px;
   border-radius: 12px;
@@ -57,3 +63,53 @@ html, body, .App {
   height: 100%;
 }
 
+
+.tableWrapper {
+  flex: 1;           /* zajmuje całą wysokość ticketList */
+  overflow-y: auto;  /* scroll tylko dla danych */
+  border-radius: 20px;
+  height: 65vh;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #3b82f6;
+  font-weight: 600;
+  position: sticky;
+  top: 0;             /* nagłówek przyklejony */
+  z-index: 1;
+}
+
+.ticketList tr:hover {
+  background-color: #f1f7f9;
+}
+
+/* notes input */
+.notes{
+  flex:1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.inputNotes{
+  display: flex;
+  border-radius: 15px;
+  width: 60vh;
+  height: 10vh;
+  padding: 10px;
+  resize: none;
+}
+.buttonsSection{
+  display: flex;
+}
