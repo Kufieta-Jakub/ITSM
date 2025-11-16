@@ -32,6 +32,35 @@ app.get("/api/tickets", (req, res) => {
   });
 });
 
+app.get("/api/getLastTicketId", (req, res) => {
+  db.query(`
+    SELECT 
+      MAX(Id) as Id
+      FROM tickets;
+  `, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Błąd bazy danych" });
+    }
+    res.json({ lastId: results[0].Id });
+  });
+});
+
+
+app.get("/api/getClientWith/:value", (req, res) => {
+  const value = `%${req.params.value}%`;
+  db.query(
+    `SELECT Name, Surname FROM clients WHERE Name LIKE ? OR Surname LIKE ?`,
+    [value, value],
+    (err, results) => {
+      if (err) return res.status(500).json({ error: "Błąd bazy danych" });
+      res.json({ clients: results });
+    }
+  );
+});
+
+
+
+
 app.get("/api/numTicketsSummary", (req, res) => {
   const query = `
     SELECT
@@ -40,7 +69,6 @@ app.get("/api/numTicketsSummary", (req, res) => {
       SUM(CASE WHEN Status = 'Resolved' THEN 1 ELSE 0 END) AS resolved
     FROM tickets
   `;
-
   db.query(query, (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Błąd bazy danych" });

@@ -2,8 +2,42 @@ import '../css/Menu.css';
 import CreateMenu from '../components/menu';
 import styles from '../css/modules/addTicket.module.css'
 import MyButton from '../components/buttons';
+import { useState,useEffect } from 'react';
 
 function AddTicket() {
+    const [id, setId] = useState([]);
+    const [value, setValue] = useState([]);
+    const [clients, setClients] = useState([]);
+    
+    const handleChanges = (e) => {
+      setValue(e.target.value);
+    };
+
+    useEffect(() => {
+      if (value.length >= 3) {
+        fetch(`http://localhost:3100/api/getClientWith/${value}`)
+          .then(res => res.json())
+          .then(data => {
+            setClients(data.clients || []);
+          })
+          .catch(err => {
+            console.error("Błąd pobierania danych:", err);
+          });
+      }
+    }, [value]);
+
+
+    useEffect(() => {
+      fetch("http://localhost:3100/api/getLastTicketId")
+        .then(res => res.json())
+        .then(data => {
+          setId(data.lastId+1); 
+        })
+        .catch(err => {
+          console.error("Błąd pobierania danych:", err);
+        });
+    }, []);
+
     return (
       <div className="App">
         <div class>
@@ -14,11 +48,11 @@ function AddTicket() {
                     <div className={`${styles.inputs}`}>
                       Ticket id:<br/>
                       {/*do value dopisuje sie to co sie wyswietla tip na przyszłosc*/}
-                      <input type='text' className={styles.form_input} readOnly></input><br/>
+                      <input type='text' className={styles.form_input_ID} readOnly value={id}></input><br/>
                       <br/>
                       <b>Client information:</b><br/>
                       Client:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input type='text' className={styles.form_input} value={value} onChange={handleChanges} placeholder='Wpisz 3 litery'></input><br/>
                       Company:<br/>
                       <input type='text' className={styles.form_input}></input><br/>
                       <br/>

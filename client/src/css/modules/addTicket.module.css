@@ -71,6 +71,12 @@ html, body, .App {
   padding: px;
   width: 100%;
 }
+.form_input_ID{
+  border-radius: 5px;
+  background-color: #d8d8d8;
+  padding: px;
+  width: 100%;
+}
 .form_buttons{
   margin-top: 30%;
   text-align: center;
