@@ -49,7 +49,7 @@ app.get("/api/getLastTicketId", (req, res) => {
 app.get("/api/getClientWith/:value", (req, res) => {
   const value = `%${req.params.value}%`;
   db.query(
-    `SELECT Name, Surname FROM clients WHERE Name LIKE ? OR Surname LIKE ?`,
+    `SELECT Id, Name, Surname, Company FROM clients WHERE Name LIKE ? OR Surname LIKE ?`,
     [value, value],
     (err, results) => {
       if (err) return res.status(500).json({ error: "Błąd bazy danych" });
