@@ -82,6 +82,27 @@ html, body, .App {
   text-align: center;
 }
 
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%; /* dokładnie pod inputem */
+  left: 0;
+  width: 100%;
+
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+
+  z-index: 50; /* nad innymi elementami */
+  
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 
 /*tabelka*/
 .tableWrapper {

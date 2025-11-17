@@ -7,26 +7,12 @@ import { useState,useEffect } from 'react';
 function AddTicket() {
     const [id, setId] = useState([]);
     const [value, setValue] = useState([]);
+    const [company, setCompany] = useState("");
+    const [getSpecificClient,setSpecificClient] = useState([]);
     const [clients, setClients] = useState([]);
-    
-    const handleChanges = (e) => {
-      setValue(e.target.value);
-    };
+    const [moreThanfive, setMoreThanfive] = useState(1);
 
-    useEffect(() => {
-      if (value.length >= 3) {
-        fetch(`http://localhost:3100/api/getClientWith/${value}`)
-          .then(res => res.json())
-          .then(data => {
-            setClients(data.clients || []);
-          })
-          .catch(err => {
-            console.error("Błąd pobierania danych:", err);
-          });
-      }
-    }, [value]);
-
-
+    // pobranie ostatniego id ticketa
     useEffect(() => {
       fetch("http://localhost:3100/api/getLastTicketId")
         .then(res => res.json())
@@ -38,9 +24,55 @@ function AddTicket() {
         });
     }, []);
 
+    //obsłużenie pokazywania sie klientów
+    const handleChanges = (e) => {
+      setValue(e.target.value);
+    };
+
+    useEffect(() => {
+      if (value.length >= 3) {
+        fetch(`http://localhost:3100/api/getClientWith/${value}`)
+          .then(res => res.json())
+          .then(data => {
+            const list = data.clients || [];
+            setClients(list);
+
+            if (list.length > 3) {
+              setMoreThanfive(3);
+            } 
+            else if(list.length==1)
+            {
+              setMoreThanfive(2);
+            }
+            else {
+              setMoreThanfive(list.length);
+            }
+          })
+          .catch(err => {
+            console.error("Błąd pobierania danych:", err);
+          });
+      }
+      else
+        setClients([]);
+    }, [value]);
+    
+    //wybór klienta
+    const handleSelect = (e) => {
+      const selectedId = e.target.value;
+      const selectedClient = clients.find(c => c.Id == selectedId);
+
+      if (!selectedClient) return;
+
+        setValue(`${selectedClient.Name} ${selectedClient.Surname}`);
+        setCompany(selectedClient.Company || "");
+        setSpecificClient(selectedId);
+        setClients([]);
+    };
+        
+
     return (
       <div className="App">
-        <div class>
+        <div>
               <CreateMenu />
         </div>
            <div className={styles.content}>
@@ -50,11 +82,21 @@ function AddTicket() {
                       {/*do value dopisuje sie to co sie wyswietla tip na przyszłosc*/}
                       <input type='text' className={styles.form_input_ID} readOnly value={id}></input><br/>
                       <br/>
-                      <b>Client information:</b><br/>
-                      Client:<br/>
-                      <input type='text' className={styles.form_input} value={value} onChange={handleChanges} placeholder='Wpisz 3 litery'></input><br/>
+                      {/* client section */}
+                      <div className={styles.selectWrapper}>
+                        <b>Client information:</b><br/>
+                        Client:<br/>
+                        <input type='text' className={styles.form_input} value={value} onChange={handleChanges} placeholder='Wpisz 3 litery'></input><br/>
+                        {clients.length>0 &&(
+                        <select size={moreThanfive} className={styles.dropdown} onChange={handleSelect}>
+                          {clients.map(client =>(
+                            <option key={client.Id} value={client.Id}>{client.Name} {client.Surname}</option>
+                          ))}
+                        </select>
+                        )}
+                      </div>
                       Company:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input type='text' className={styles.form_input} value={company} readOnly></input><br/>
                       <br/>
 
                       <b>Ticket information:</b><br/>
@@ -104,72 +146,6 @@ function AddTicket() {
                               <td>Anna Kowalska</td>
                               <td>2025-11-10 10:15</td>
                               <td>Klient zgłosił problem z logowaniem.</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Piotr Nowak</td>
-                              <td>2025-11-10 11:40</td>
-                              <td>Sprawa przekazana do działu IT.</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Agnieszka Lewandowska</td>
-                              <td>2025-11-10 13:05</td>
-                              <td>Problem rozwiązany – konto odblokowane.</td>
-                            </tr>
-                            <tr>
-                              <td>1</td>
-                              <td>Anna Kowalska</td>
-                              <td>2025-11-10 10:15</td>
-                              <td>Klient zgłosił problem z logowaniem.</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Piotr Nowak</td>
-                              <td>2025-11-10 11:40</td>
-                              <td>Sprawa przekazana do działu IT.</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Agnieszka Lewandowska</td>
-                              <td>2025-11-10 13:05</td>
-                              <td>Problem rozwiązany – konto odblokowane.</td>
-                            </tr>
-                            <tr>
-                              <td>1</td>
-                              <td>Anna Kowalska</td>
-                              <td>2025-11-10 10:15</td>
-                              <td>Klient zgłosił problem z logowaniem.</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Piotr Nowak</td>
-                              <td>2025-11-10 11:40</td>
-                              <td>Sprawa przekazana do działu IT.</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Agnieszka Lewandowska</td>
-                              <td>2025-11-10 13:05</td>
-                              <td>Problem rozwiązany – konto odblokowane.</td>
-                            </tr>
-                            <tr>
-                              <td>1</td>
-                              <td>Anna Kowalska</td>
-                              <td>2025-11-10 10:15</td>
-                              <td>Klient zgłosił problem z logowaniem.</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Piotr Nowak</td>
-                              <td>2025-11-10 11:40</td>
-                              <td>Sprawa przekazana do działu IT.</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Agnieszka Lewandowska</td>
-                              <td>2025-11-10 13:05</td>
-                              <td>Problem rozwiązany – konto odblokowane.</td>
                             </tr>
                           </tbody>
                         </table>
