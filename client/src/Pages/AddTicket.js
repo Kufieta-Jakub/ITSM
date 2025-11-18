@@ -11,6 +11,19 @@ function AddTicket() {
     const [getSpecificClient,setSpecificClient] = useState([]);
     const [clients, setClients] = useState([]);
     const [moreThanfive, setMoreThanfive] = useState(1);
+    const [data, setData] = useState({
+      
+      name:"",
+      surname:"",
+      description: "",
+      template: "",
+      title: "",
+      service: "",
+      impact: "4 - not important",
+      assigne: "",
+      status: "",
+      resolution: ""
+    });
 
     // pobranie ostatniego id ticketa
     useEffect(() => {
@@ -64,11 +77,27 @@ function AddTicket() {
       if (!selectedClient) return;
 
         setValue(`${selectedClient.Name} ${selectedClient.Surname}`);
+        setData({
+          ...data,
+          name: selectedClient.Name,
+          surname: selectedClient.Surname
+        });
         setCompany(selectedClient.Company || "");
         setSpecificClient(selectedId);
         setClients([]);
     };
-        
+    
+    const saveTicket = async () => {
+      const res = await fetch("/api/addTicket", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      console.log(result);
+    };
+
 
     return (
       <div className="App">
@@ -101,30 +130,81 @@ function AddTicket() {
 
                       <b>Ticket information:</b><br/>
                       Description:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.description}
+                        onChange={(e) => setData({ ...data, description: e.target.value })}
+                      /><br/>
+
                       Template:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.template}
+                        onChange={(e) => setData({ ...data, template: e.target.value })}
+                      /><br/>
+
                       Title:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
-                      <br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.title}
+                        onChange={(e) => setData({ ...data, title: e.target.value })}
+                      /><br/>
 
                       <b>Advanced information:</b><br/>
                       Service:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
-                      Urgentity:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.service}
+                        onChange={(e) => setData({ ...data, service: e.target.value })}
+                      /><br/>
+
+                      Impact:<br/>
+                      <select
+                        type='text'
+                        className={styles.form_input}
+                        value={data.impact}
+                        onChange={(e) => setData({ ...data, impact: e.target.value })}
+                      >
+                      <option>4 - not important</option>
+                      <option>3 - slighty important</option>
+                      <option>2 - important</option>
+                      <option>1 - important as hell</option>
+                      </select><br/>
                       Assigne:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.assigne}
+                        onChange={(e) => setData({ ...data, assigne: e.target.value })}
+                      /><br/>
+
                       Status:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.status}
+                        onChange={(e) => setData({ ...data, status: e.target.value })}
+                      /><br/>
+
                       Resolution:<br/>
-                      <input type='text' className={styles.form_input}></input><br/>
+                      <input
+                        type='text'
+                        className={styles.form_input}
+                        value={data.resolution}
+                        onChange={(e) => setData({ ...data, resolution: e.target.value })}
+                      /><br/>
+
                       <div className={styles.form_buttons}>
                         <MyButton
-                            text="Save ticket"
-                            width={"170px"}
-                            margin={5}
-                            />
+                          text="Save ticket"
+                          width={"170px"}
+                          margin={5}
+                          onClick={() => console.log(data)}
+                        />
                       </div>
                     </div>
                     <div className={styles.rightTicket}>
