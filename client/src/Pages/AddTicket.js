@@ -88,7 +88,7 @@ function AddTicket() {
     };
     
     const saveTicket = async () => {
-      const res = await fetch("/api/addTicket", {
+      const res = await fetch("http://localhost:3100/api/addTicket", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -203,7 +203,7 @@ function AddTicket() {
                           text="Save ticket"
                           width={"170px"}
                           margin={5}
-                          onClick={() => console.log(data)}
+                          onClick={saveTicket}
                         />
                       </div>
                     </div>

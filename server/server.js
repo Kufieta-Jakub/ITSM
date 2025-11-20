@@ -79,6 +79,12 @@ app.get("/api/numTicketsSummary", (req, res) => {
 });
 
 
+app.post("/api/addTicket", (req, res) => {
+  console.log("req.body:", req.body);
+  res.json({ message: req.body, data: req.body });
+});
+
+
 app.listen(3100, () => {
   console.log("Server działa na http://localhost:3100");
 });
